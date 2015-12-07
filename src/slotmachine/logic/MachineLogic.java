@@ -1,8 +1,5 @@
 package slotmachine.logic;
 
-/**
- * Created by Iaroslav on 06.12.2015.
- */
 public class MachineLogic {
 
     // храним баланс игрока
@@ -55,32 +52,25 @@ public class MachineLogic {
             isWin = true;
             switch (seqArray[1]){
                 case 0:
-                    currentWin = bet * 100;
-                    balance = balance - bet + currentWin;
+                    balance = winSize(bet, 140);
                     break;
                 case 1:
-                    currentWin = bet * 10;
-                    balance = balance - bet + currentWin;
+                    balance = winSize(bet, 20);
                     break;
                 case 2:
-                    currentWin = bet * 20;
-                    balance = balance - bet + currentWin;
+                    balance = winSize(bet, 40);
                     break;
                 case 3:
-                    currentWin = bet * 30;
-                    balance = balance - bet + currentWin;
+                    balance = winSize(bet, 80);
                     break;
                 case 4:
-                    currentWin = bet * 40;
-                    balance = balance - bet + currentWin;
+                    balance = winSize(bet, 100);
                     break;
                 case 5:
-                    currentWin = bet * 50;
-                    balance = balance - bet + currentWin;
+                    balance = winSize(bet, 120);
                     break;
                 default:
-                    currentWin = 0;
-                    balance = balance - bet;
+                    balance = winSize(bet, 0);
                     isWin = false;
                     break;
             }
@@ -93,20 +83,23 @@ public class MachineLogic {
         return isWin;
     }
 
+    // метод подсчета сыграной ставки
+    private int winSize (int betTemp, int mult){
+        currentWin = betTemp * mult;
+        return balance - bet + currentWin;
+    }
+
 
     // геттры сеттеры
-
     public int getBalance() {
         return balance;
     }
     public void setBalance(int balance) {
         this.balance = balance;
     }
-
     public int getCurrentWin() {
         return currentWin;
     }
-
     public boolean isWin() {
         return isWin;
     }

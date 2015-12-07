@@ -4,9 +4,6 @@ import slotmachine.userinterface.UserInterface;
 
 import java.util.Scanner;
 
-/**
- * Created by Iaroslav on 06.12.2015.
- */
 public class Main {
 
     public static void main(String[] args) {
@@ -77,20 +74,31 @@ public class Main {
             if (isInt){
                 try {
                     int select = Integer.parseInt(isGame);
+                    // игра
                     if(select == 1){
-                        int[] gameArray = machineLogic.sequence();
-                        String[] outArray = userInterface.outFormat(gameArray);
 
+                        // получение выигрышной комбинации
+                        int[] gameArray = machineLogic.sequence();
+
+                        // преобразование комбинации в текстовый вид и форматирование вывода
+                        String[] outArray = userInterface.getFormattedArray(gameArray);
+
+                        // вывод комбинации
                         for (int i = 0; i < outArray.length; i++){
                             System.out.println(outArray[i]);
                         }
 
+                        // если баланс после очередной игры ==0 то конец игры
                         if (machineLogic.getBalance()==0){
                             lostEverything = true;
                             game = false;
+
+                            // если баланс >500 то тоже конец игры и выдача выигрыша
                         } else if (machineLogic.getBalance() > 500){
                             takeAll = true;
                             game = false;
+                            // иначе если ставка сыглала то печать суммы выигрыша
+                            // если не сыграла то печать проигрыша
                         } else {
                             if(machineLogic.isWin()){
                                 System.out.println(userInterface.YOUWIN + machineLogic.getCurrentWin());
@@ -101,7 +109,7 @@ public class Main {
                             }
                         }
 
-                    } else if (select == 2){
+                    } else if (select == 2){ // выход из игры
                         game = false;
                     } else {
                         System.out.println(userInterface.NOTSELECT);

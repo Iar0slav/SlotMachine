@@ -1,8 +1,5 @@
 package slotmachine.userinterface;
 
-/**
- * Created by Iaroslav on 06.12.2015.
- */
 public class UserInterface {
 
     public final String WELCOME     = "Добро пожаловать в игру \"Однорукий бандит\" \n" + "Для начала игры необходимо внести монеты в автомат. Принимаемая величина от 1 до 100.";
@@ -21,54 +18,66 @@ public class UserInterface {
 
     private final String[] barrelArray = {"BAR", "Лимон", "Вишня", "Груша", "Персик", "777"};
 
-    // получаем массив из выпавших интов и форматируем в массив строк, который понятнее для играющего
-    public String[] outFormat(int[] barrelInt){
-        String[] barrelString = new String[3];
-        for (int i = 0; i < 3; i++){
-            barrelString[i] = barrelArray[barrelInt[i]];
-        }
+    // получаем отформатированный масив строк для вывода в консоль
+    public String[] getFormattedArray(int[] barrelInt){
+        return formatting(barrelInt);
+    }
 
+    // формируев масив строк для красивой выдачи
+    private String[] formatting(int[] barrelInt){
+
+        // промежуточный массив вместо чисел названия элементов
+        String[] barrelString = changeFormat(barrelInt);
+
+        // далее готовим красивый вывод, пока не очень красивым кодом...
         String[] outFormat = new String[5];
-        String first = barrelString[0];
-        int a = first.length();
-        String second = barrelString[1];
-        int b = second.length();
-        String third = barrelString[2];
-        int c = third.length();
+
+        int a = barrelString[0].length();
+        int b = barrelString[1].length();
+        int c = barrelString[2].length();
         int temp = a + b + c + 16;
-        String line1 = "";
-        String line2 = "x";
-        String line3 = "";
+        String line04 = "";
+        String line13 = "x";
+        String line2 = "";
 
+        // строки первая и пятая
         for (int i = 0; i < temp; i++ ){
-            line1 = line1 + "x";
+            line04 = line04 + "x";
         }
-        outFormat[0] = line1;
-        outFormat[4] = line1;
+        outFormat[0] = line04;
+        outFormat[4] = line04;
 
+        // строки вторая и четвертая
         for (int i = 0; i < a+4; i++ ){
-            line2 = line2 + " ";
+            line13 = line13 + " ";
         }
-        line2 = line2 + "x";
+        line13 = line13 + "x";
 
         for (int i = 0; i < b+4; i++ ){
-            line2 = line2 + " ";
+            line13 = line13 + " ";
         }
-        line2 = line2 + "x";
+        line13 = line13 + "x";
 
         for (int i = 0; i < c+4; i++ ){
-            line2 = line2 + " ";
+            line13 = line13 + " ";
         }
-        line2 = line2 + "x";
-        outFormat[1] = line2;
-        outFormat[3] = line2;
+        line13 = line13 + "x";
+        outFormat[1] = line13;
+        outFormat[3] = line13;
 
-        line3 = "x  " + barrelString[0] + "  x  " + barrelString[1] + "  x  " + barrelString[2] + "  x";
-        outFormat[2] = line3;
-
-
+        // строка третья
+        line2 = "x  " + barrelString[0] + "  x  " + barrelString[1] + "  x  " + barrelString[2] + "  x";
+        outFormat[2] = line2;
 
         return outFormat;
     }
 
+    // преобразуем масив интов в массив элементов, который понятнее для играющего
+    private String[] changeFormat(int[] barrelInt){
+        String[] barrelString = new String[3];
+        for (int i = 0; i < 3; i++){
+            barrelString[i] = barrelArray[barrelInt[i]];
+        }
+        return barrelString;
+    }
 }
