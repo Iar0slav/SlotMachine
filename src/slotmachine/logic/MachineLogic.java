@@ -90,7 +90,7 @@ public class MachineLogic {
     }
 
 
-    // геттры сеттеры
+    // геттеры сеттеры
     public int getBalance() {
         return balance;
     }

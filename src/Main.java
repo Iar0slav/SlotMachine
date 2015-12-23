@@ -1,5 +1,6 @@
 import slotmachine.logic.CheckForInt;
 import slotmachine.logic.MachineLogic;
+import slotmachine.userinterface.LocalizationRu;
 import slotmachine.userinterface.UserInterface;
 
 import java.util.Scanner;
@@ -18,15 +19,15 @@ public class Main {
         boolean takeAll         = false;
 
         // Приветствие
-        System.out.println(userInterface.WELCOME);
+        System.out.println(LocalizationRu.WELCOME);
 
         // Вывод ко-ва монет на счету
-        System.out.println(userInterface.BALANCE + machineLogic.getBalance());
+        System.out.println(LocalizationRu.BALANCE + machineLogic.getBalance());
 
         // цикл обработки ввода монет
         do{
             // приглашение на ввод монет
-            System.out.print(userInterface.ADDCOINS);
+            System.out.print(LocalizationRu.ADDCOINS);
             // получаем строку и проверяем числовая ли она
             Scanner addCoins = new Scanner(System.in);
             String isCoins = addCoins.nextLine();
@@ -36,7 +37,7 @@ public class Main {
             проверка на число
             иначе повторное приглашение на ввод и повтор цикла
             */
-            if (isCoins.equals(userInterface.EXIT)){
+            if (isCoins.equals(LocalizationRu.EXIT)){
                 System.exit(0);
             } else if(isInt){
                 try {
@@ -45,23 +46,23 @@ public class Main {
                         addCoin = false;
                         machineLogic.setBalance(coinBalance);
                     } else {
-                        System.out.println(userInterface.INCORRECT);
+                        System.out.println(LocalizationRu.INCORRECT);
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println(userInterface.INCORRECT);
+                    System.out.println(LocalizationRu.INCORRECT);
                 }
             } else {
-                System.out.println(userInterface.INCORRECT);
+                System.out.println(LocalizationRu.INCORRECT);
             }
         } while(addCoin);
 
         // Вывод ко-ва монет на счету
-        System.out.println(userInterface.BALANCE + machineLogic.getBalance());
+        System.out.println(LocalizationRu.BALANCE + machineLogic.getBalance());
 
         // реализация игры
         do {
             // приглашение начать игру или выйти
-            System.out.println(userInterface.STARTGAME);
+            System.out.println(LocalizationRu.STARTGAME);
             // получаем строку и проверяем числовая ли она
             Scanner gameOrNot = new Scanner(System.in);
             String isGame = gameOrNot.nextLine();
@@ -97,42 +98,42 @@ public class Main {
                         } else if (machineLogic.getBalance() > 500){
                             takeAll = true;
                             game = false;
-                            // иначе если ставка сыглала то печать суммы выигрыша
+                            // иначе если ставка сыграла то печать суммы выигрыша
                             // если не сыграла то печать проигрыша
                         } else {
                             if(machineLogic.isWin()){
-                                System.out.println(userInterface.YOUWIN + machineLogic.getCurrentWin());
-                                System.out.println(userInterface.BALANCE + machineLogic.getBalance());
+                                System.out.println(LocalizationRu.YOUWIN + machineLogic.getCurrentWin());
+                                System.out.println(LocalizationRu.BALANCE + machineLogic.getBalance());
                             } else {
-                                System.out.println(userInterface.YOULOSE);
-                                System.out.println(userInterface.BALANCE + machineLogic.getBalance());
+                                System.out.println(LocalizationRu.YOULOSE);
+                                System.out.println(LocalizationRu.BALANCE + machineLogic.getBalance());
                             }
                         }
 
                     } else if (select == 2){ // выход из игры
                         game = false;
                     } else {
-                        System.out.println(userInterface.NOTSELECT);
+                        System.out.println(LocalizationRu.NOTSELECT);
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println(userInterface.NOTSELECT);
+                    System.out.println(LocalizationRu.NOTSELECT);
                 }
             } else {
-                System.out.println(userInterface.NOTSELECT);
+                System.out.println(LocalizationRu.NOTSELECT);
             }
 
         } while (game);
 
         // окончание игры, обналичка или потеря всего
         if (lostEverything){
-            System.out.println(userInterface.LOOSER);
+            System.out.println(LocalizationRu.LOOSER);
         } else if (takeAll){
-            System.out.println(userInterface.GAMEOVER);
-            System.out.println(userInterface.FINISHGAME + machineLogic.getBalance());
-            System.out.println(userInterface.TAKEPRIZE);
+            System.out.println(LocalizationRu.GAMEOVER);
+            System.out.println(LocalizationRu.FINISHGAME + machineLogic.getBalance());
+            System.out.println(LocalizationRu.TAKEPRIZE);
         } else {
-            System.out.println(userInterface.FINISHGAME + machineLogic.getBalance());
-            System.out.println(userInterface.TAKEPRIZE);
+            System.out.println(LocalizationRu.FINISHGAME + machineLogic.getBalance());
+            System.out.println(LocalizationRu.TAKEPRIZE);
         }
     }
 }
