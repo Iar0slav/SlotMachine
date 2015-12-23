@@ -56,7 +56,7 @@ public class Main {
             }
         } while(addCoin);
 
-        // Вывод ко-ва монет на счету
+        // Вывод кол-ва монет на счету
         System.out.println(LocalizationRu.BALANCE + machineLogic.getBalance());
 
         // реализация игры
